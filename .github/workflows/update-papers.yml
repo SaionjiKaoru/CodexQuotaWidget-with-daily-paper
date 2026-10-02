@@ -1,0 +1,22 @@
+# CodexQuotaWidget daily paper feed setup
+
+This package contains one GitHub Actions workflow:
+
+`.github/workflows/update-papers.yml`
+
+It runs every day at 11:00 UTC (19:00 Asia/Shanghai), searches the live web with the OpenAI Responses API, updates `papers.json`, and keeps `paper-history.json` to avoid repeatedly showing the same paper.
+
+## One-time setup
+
+1. In the GitHub repository, create this file path:
+   `.github/workflows/update-papers.yml`
+   and paste the workflow contents.
+2. In the repository go to:
+   Settings → Secrets and variables → Actions → New repository secret
+3. Name the secret:
+   `OPENAI_API_KEY`
+4. Paste your OpenAI API key as the value.
+5. Go to the repository's Actions tab, open **Update daily SLE papers**, and choose **Run workflow** once for a manual test.
+6. After it succeeds, `papers.json` should update automatically. The Mac app will poll the raw JSON feed.
+
+The API key must remain in GitHub Secrets; do not put it in `papers.json`, source code, commits, or chat messages.
